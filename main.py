@@ -10,8 +10,17 @@ root.iconbitmap('img/roomba.ico')
 title = Label(root, text='Roomba Simulator: Habitaciones rectangulares/cuadradas', font=('Modern', 20, 'bold'))
 title.grid(row=0, column=0, columnspan=2, pady=20, sticky='nsew')
 
+# VISUALIZACIÓN DE HABITACIONES CON OBJETOS
+frame3 = Frame(root, padx=10, pady=10)
+frame3.grid(row=1, column=1, sticky='nsew', rowspan=2)
+frame3.grid_rowconfigure(1, weight=1)
+frame3.grid_columnconfigure(2, weight=1)
+
+canvas = Canvas(frame3, bg="white", bd=1, highlightthickness=1, relief='ridge')
+canvas.grid(row=1, column=2, sticky='nsew')
+
 # INFORMACIÓN: Habitación
-frame = Frame(root, width=20)
+frame = Frame(root, width=10)
 frame.grid(row=1, column=0, sticky='w')
 
     # HABITACIÓN
@@ -30,11 +39,11 @@ Label(frame, text='Alto de la habitación: ').grid(row=2, column=0, padx=10, pad
 Entry(frame, justify='right', width=15, textvariable=y).grid(row=2, column=1)
 Label(frame, text='m').grid(row=2, column=2, sticky='w')
 
-button_hab = Button(frame, text='Agregar habitación', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_habitacion(nombre, x, y))
+button_hab = Button(frame, text='Agregar habitación', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_habitacion(nombre, x, y, canvas))
 button_hab.grid(row=3, column=0, columnspan=2, padx=15, pady=10, sticky='nsew')
 
 # INFORMACIÓN: Objeto
-frame2 = Frame(root, width=20)
+frame2 = Frame(root, width=10)
 frame2.grid(row=2, column=0, sticky='w')
     # OBJETO
 hab_obj = StringVar()
@@ -66,5 +75,6 @@ Entry(frame2, justify='right', width=15, textvariable=coord_y).grid(row=5, colum
 
 button_obj = Button(frame2, text='Agregar objeto', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_object(hab_obj, nombre_obj, x_obj, y_obj, coord_x, coord_y))
 button_obj.grid(row=6, column=0, columnspan=2, padx=15, pady=10, sticky='nsew')
+
 
 root.mainloop()

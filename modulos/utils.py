@@ -1,8 +1,8 @@
-from .classZona import Zona, Objeto
-from tkinter import messagebox, END
+from .classZona import Zona
+from tkinter import messagebox, END, Canvas
 habitaciones = [] # Lista que contiene todas las habitaciones.
 
-def add_habitacion(nombre_hab, x_hab, y_hab):
+def add_habitacion(nombre_hab, x_hab, y_hab, canvas):
     nombre = nombre_hab.get()
     x = x_hab.get()
     y = y_hab.get()
@@ -13,6 +13,7 @@ def add_habitacion(nombre_hab, x_hab, y_hab):
             if x > 0 and y > 0:
                 habitacion = Zona(nombre, x, y)
                 habitaciones.append(habitacion)
+                display_habitacion(nombre, x, y, canvas)
                 for i in [x_hab, y_hab , nombre_hab]:
                     i.set('')
                 messagebox.showinfo('Agregado', f'Habitación {nombre} agregada con éxito.', icon=messagebox.INFO)
@@ -55,3 +56,9 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var):
             messagebox.showerror('Error', 'Los valores deben ser numéricos positivos.', icon=messagebox.ERROR)
     else:
         messagebox.showerror('Error', 'Todos los campos son obligatorios.', icon=messagebox.ERROR)
+
+
+def display_habitacion(nombre, ancho ,alto, canvas):
+    x1, y1, x2, y2 = 0, 0, ancho * 10, alto * 10 # 1 metro equivale a 10 pixeles.
+    canvas.create_rectangle(x1, y1, x2, y2, outline='black', fill='plum2')
+    canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}:\n{ancho}x{alto}\nÁrea: m²', font=('Helveltica', 10, 'bold'), anchor='center', justify='center')

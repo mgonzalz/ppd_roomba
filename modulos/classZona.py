@@ -1,24 +1,31 @@
 class Zona():
-    def __init__(self, x1, x2, y1, y2, xobjeto, yobjeto):
-        if all(isinstance(coord, float) for coord in (x1, x2, y1, y2, xobjeto, yobjeto)):
-            self.x1 = x1
-            self.x2 = x2
-            self.y1 = y1
-            self.y2 = y2
-            self.xobjeto = xobjeto
-            self.yobjeto = yobjeto
+    def __init__(self, nombre, x, y):
+        if all(isinstance(coord, float) for coord in (x,y)) and isinstance(nombre, str):
+            self.nombre = nombre
+            self.x = x
+            self.y = y
+            self.objeto = [] # Objetos innaccesibles para el Roomba.
         else:
-            raise ValueError("Los valores deben ser flotantes")
+            raise ValueError("Los valores, ancho y alto, deben ser flotantes y el nombre debe ser un string.")
+    def add_objeto(self, nombre_obj, xobj, yobj, coord_x, coord_y): #xobj, yobj = ancho y alto del objeto; coord_x, coord_y = coordenadas cartesianas del objeto.
+        if all(isinstance(coord, float) for coord in (xobj, yobj, coord_x, coord_y)) and isinstance(nombre_obj, str):
+            self.objeto.append(Objeto(nombre_obj, xobj, yobj, coord_x, coord_y))
+        else:
+            raise ValueError("Los valores, ancho y alto junto a las coordenadas, deben ser flotantes y el nombre debe ser un string.")
     def get_area(self):
-        return (self.x2 - self.x1) * (self.y2 - self.y1)
-    def get_x(self):
-        return self.x2 - self.x1
-    def get_y(self):
-        return self.y2 - self.y1
+        return self.x * self.y
+    def __str__(self):
+        return f'Habitación: {self.nombre}\nAncho: {self.x} m\nAlto: {self.y} m\nÁrea: {self.get_area()} m²\nObjetos: {len(self.objeto)}\n\n'
 
 
-class Seccion(Zona):
-    def __init__(self, x1, x2, y1, y2, xobjeto, yobjeto, xseccion, yseccion):
-        super().__init__(x1, x2, y1, y2, xobjeto, yobjeto)
-        self.xseccion = xseccion
-        self.yseccion = yseccion
+class Objeto(Zona):
+    def __init__(self, nombre, x, y, coord_x, coord_y):
+        self.nombre = nombre
+        self.x = x
+        self.y = y
+        self.coord_x = coord_x
+        self.coord_y = coord_y
+    def get_area(self):
+        return self.x * self.y
+    def __str__(self):
+        return f'Objeto: {self.nombre}\nAncho: {self.x} m\nAlto: {self.y} m\nÁrea: {self.get_area()} m²\nCoordenadas: ({self.coord_x}, {self.coord_y})\n\n'

@@ -73,7 +73,7 @@ Entry(frame2, justify='right', width=15, textvariable=coord_x).grid(row=4, colum
 Label(frame2, text='Coordenada Y: ').grid(row=5, column=0, padx=10, pady=10, sticky='w')
 Entry(frame2, justify='right', width=15, textvariable=coord_y).grid(row=5, column=1)
 
-button_obj = Button(frame2, text='Agregar objeto', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_object(hab_obj, nombre_obj, x_obj, y_obj, coord_x, coord_y))
+button_obj = Button(frame2, text='Agregar objeto', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_object(hab_obj, nombre_obj, x_obj, y_obj, coord_x, coord_y, canvas))
 button_obj.grid(row=6, column=0, columnspan=2, padx=15, pady=10, sticky='nsew')
 
 

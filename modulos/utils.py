@@ -1,5 +1,5 @@
 from .classZona import Zona
-from tkinter import messagebox, END, Canvas
+from tkinter import messagebox, END
 habitaciones = [] # Lista que contiene todas las habitaciones.
 
 def add_habitacion(nombre_hab, x_hab, y_hab, canvas):
@@ -25,7 +25,7 @@ def add_habitacion(nombre_hab, x_hab, y_hab, canvas):
         messagebox.showerror('Error', 'Todos los campos son obligatorios.')
 
 
-def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var):
+def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var, canvas):
     hab = hab_var.get()
     nombre = nombre_var.get()
     x = x_var.get()
@@ -44,7 +44,7 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var):
                 for habitacion in habitaciones:
                     if habitacion.nombre == hab:
                         habitacion.add_objeto(nombre, x, y, coord_x, coord_y)
-
+                        display_objecto(nombre, x, y, coord_x, coord_y, canvas)
                         for var in [hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var]:
                             var.set('')
 
@@ -60,5 +60,11 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var):
 
 def display_habitacion(nombre, ancho ,alto, canvas):
     x1, y1, x2, y2 = 0, 0, ancho * 10, alto * 10 # 1 metro equivale a 10 pixeles.
-    canvas.create_rectangle(x1, y1, x2, y2, outline='black', fill='plum2')
+    canvas.create_rectangle(x1, y1, x2, y2, fill='lightgrey')
     canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}:\n{ancho}x{alto}\nÁrea: m²', font=('Helveltica', 10, 'bold'), anchor='center', justify='center')
+
+
+def display_objecto(nombre, ancho, alto, coord_x, coord_y, canvas):
+    x1, y1, x2, y2 = coord_x * 10, coord_y * 10, (coord_x + ancho) * 10, (coord_y + alto) * 10
+    canvas.create_rectangle(x1, y1, x2, y2, fill='plum2')
+    canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}', justify='center', anchor='center', font=('Helveltica', 10, 'bold'), fill='white')

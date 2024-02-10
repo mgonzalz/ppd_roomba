@@ -1,45 +1,39 @@
 from tkinter import *
-
+from modulos.utils import *
 
 # CONFIGURACIÓN ROOT
 root = Tk()
 root.title('Roomba Simulator')
 root.geometry('800x600')
-root.config(bg='white')
 root.iconbitmap('img/roomba.ico')
 
-title = Label(root, text='Roomba Simulator: Habitaciones rectangulares/cuadradas', font=('Helveltica', 20, 'bold'), bg='white')
-title.grid(row=0, column=0, pady=20, sticky='nsew')
+title = Label(root, text='Roomba Simulator: Habitaciones rectangulares/cuadradas', font=('Modern', 20, 'bold'))
+title.grid(row=0, column=0, columnspan=2, pady=20, sticky='nsew')
 
-# CONFIGURACIÓN MEDIDAS
+# INFORMACIÓN
+frame = Frame(root, width=30)
+frame.grid(row=1, column=0, sticky='w')
+
+    # HABITACIÓN
+nombre = StringVar()
 x = StringVar()
 y = StringVar()
 
-datos = Frame(root, bg='white', width=200, height=400)
-datos.grid(row=1, column=0, pady=20, sticky=NW)
+Label(frame, text='Nombre de la habitación: ').grid(row=0, column=0, padx=10, pady=10, sticky='w')
+Entry(frame, justify='right', width=15, textvariable=nombre).grid(row=0, column=1)
+Label(frame, text='m').grid(row=0, column=2, sticky='w')
 
-    # ANCHO: X
-x_title = Label(datos, text='Ancho:', font=('Helveltica', 15), bg='white')
-x_title.grid(row=0, column=0, pady=20)
+Label(frame, text='Ancho de la habitación: ').grid(row=1, column=0, padx=10, pady=10, sticky='w')
+Entry(frame, justify='right', width=15, textvariable=x).grid(row=1, column=1)
+Label(frame, text='m').grid(row=1, column=2, sticky='w')
 
-x = Entry(datos, font=('Helveltica', 15), bg='white', justify='right')
-x.grid(row=0, column=1, pady=20)
+Label(frame, text='Alto de la habitación: ').grid(row=2, column=0, padx=10, pady=10, sticky='w')
+Entry(frame, justify='right', width=15, textvariable=y).grid(row=2, column=1)
+Label(frame, text='m').grid(row=2, column=2, sticky='w')
 
-Label(datos, text='m', font=('Helveltica', 15), bg='white').grid(row=0, column=2, pady=20)
+button_hab = Button(frame, text='Agregar habitación', bg='#B7AEA1', fg='white', border=0, width=4, command=lambda:add_habitacion(nombre, x, y))
+button_hab.grid(row=3, column=0, columnspan=2, padx=15, pady=10, sticky='nsew')
 
-    # ALTURA: Y
-y_title = Label(datos, text='Alto:', font=('Helveltica', 15), bg='white')
-y_title.grid(row=1, column=0, pady=20)
-
-y = Entry(datos, font=('Helveltica', 15), bg='white', justify='right')
-y.grid(row=1, column=1, pady=20)
-
-Label(datos, text='m', font=('Helveltica', 15), bg='white').grid(row=1, column=2, pady=20)
-
-    # BOTÓN: CREAR HABITACIÓN
-button = Button(datos, text='Crear habitación', font=('Helvetica', 15), bg='white', width=15, height=1)
-button.grid(row=0, column=3, rowspan=2, padx=20, pady=20, sticky='nsew')
-
-
+    # OBJETO
 
 root.mainloop()

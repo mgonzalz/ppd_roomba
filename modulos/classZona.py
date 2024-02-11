@@ -13,7 +13,10 @@ class Zona():
         else:
             raise ValueError("Los valores, ancho y alto junto a las coordenadas, deben ser flotantes y el nombre debe ser un string.")
     def get_area(self):
-        return self.x * self.y
+        area = self.x * self.y
+        for obj in self.objeto:
+            area -= obj.get_area()
+        return area
     def __str__(self):
         return f'Habitación: {self.nombre}\nAncho: {self.x} m\nAlto: {self.y} m\nÁrea: {self.get_area()} m²\nObjetos: {len(self.objeto)}\n\n'
 

@@ -44,6 +44,7 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var, canv
                 for habitacion in habitaciones:
                     if habitacion.nombre == hab:
                         habitacion.add_objeto(nombre, x, y, coord_x, coord_y)
+                        canvas.itemconfig(habitacion.id_canvas, text=f'{habitacion.nombre}:\n{habitacion.x}x{habitacion.y}\nÁrea: {habitacion.get_area()}m²')
                         display_objecto(nombre, x, y, coord_x, coord_y, canvas)
                         for var in [hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var]:
                             var.set('')
@@ -60,9 +61,10 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var, canv
 
 def display_habitacion(nombre, ancho ,alto, canvas):
     x1, y1, x2, y2 = 0, 0, ancho * 10, alto * 10 # 1 metro equivale a 10 pixeles.
+    area = habitaciones[-1].get_area() # al añadir la habitación, se trata del último elemento de la lista.
     canvas.create_rectangle(x1, y1, x2, y2, fill='lightgrey')
-    canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}:\n{ancho}x{alto}\nÁrea: m²', font=('Helveltica', 10, 'bold'), anchor='center', justify='center')
-
+    text = canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}:\n{ancho}x{alto}\nÁrea: {area}m²', font=('Helveltica', 10, 'bold'), anchor='center', justify='center')
+    habitaciones[-1].id_canvas = text # id en el objeto para modificar el texto en el canvas (área).
 
 def display_objecto(nombre, ancho, alto, coord_x, coord_y, canvas):
     x1, y1, x2, y2 = coord_x * 10, coord_y * 10, (coord_x + ancho) * 10, (coord_y + alto) * 10

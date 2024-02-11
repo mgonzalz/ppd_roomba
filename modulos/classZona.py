@@ -17,6 +17,9 @@ class Zona():
         for obj in self.objeto:
             area -= obj.get_area()
         return area
+    def get_tiempo(self):
+        velocidad = 0.3 # Velocidad del Roomba (m^2/s).
+        return self.get_area() / velocidad
     def __str__(self):
         return f'Habitación: {self.nombre}\nAncho: {self.x} m\nAlto: {self.y} m\nÁrea: {self.get_area()} m²\nObjetos: {len(self.objeto)}\n\n'
 

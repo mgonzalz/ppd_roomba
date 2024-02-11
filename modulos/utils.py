@@ -18,7 +18,6 @@ def add_habitacion(nombre_hab, x_hab, y_hab, canvas):
                 display_habitacion(nombre, x, y, canvas)
                 for i in [x_hab, y_hab , nombre_hab]:
                     i.set('')
-                messagebox.showinfo('Agregado', f'Habitación {nombre} agregada con éxito.', icon=messagebox.INFO)
             else:
                 messagebox.showerror('Error', 'Los valores deben ser positivos.')
         except ValueError:
@@ -50,8 +49,6 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var, canv
                         display_objecto(nombre, x, y, coord_x, coord_y, canvas)
                         for var in [hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var]:
                             var.set('')
-
-                        messagebox.showinfo('Agregado', f'Objeto {nombre} agregado con éxito en la habitación {hab}.', icon=messagebox.INFO)
                         break
                 else:
                     messagebox.showerror('Error', f'La habitación {hab} no existe.', icon=messagebox.ERROR)

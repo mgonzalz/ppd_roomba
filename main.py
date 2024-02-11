@@ -13,11 +13,19 @@ title.grid(row=0, column=0, columnspan=2, pady=20, sticky='nsew')
 # VISUALIZACIÓN DE HABITACIONES CON OBJETOS
 frame3 = Frame(root, padx=10, pady=10)
 frame3.grid(row=1, column=1, sticky='nsew', rowspan=2)
-frame3.grid_rowconfigure(1, weight=1)
-frame3.grid_columnconfigure(2, weight=1)
+frame3.grid_rowconfigure(0, weight=1) # ajustar al tamaño del grid por completo.
+frame3.grid_columnconfigure(0, weight=1)
 
-canvas = Canvas(frame3, bg="white", bd=1, highlightthickness=1, relief='ridge')
-canvas.grid(row=1, column=2, sticky='nsew')
+    # CANVAS
+canvas = Canvas(frame3, bg="white", bd=1, highlightthickness=1, relief='ridge', scrollregion=(0,0,500,500))
+canvas.grid(row=0, column=0, sticky='nsew')
+
+    # SCROLLBAR
+hbar = Scrollbar(frame3, orient=HORIZONTAL, command=canvas.xview)
+hbar.grid(row=1, column=0, sticky='ew')
+vbar = Scrollbar(frame3, orient=VERTICAL, command=canvas.yview)
+vbar.grid(row=0, column=1, sticky='ns')
+canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
 
 # INFORMACIÓN: Habitación
 frame = Frame(root, width=10)

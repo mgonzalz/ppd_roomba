@@ -4,7 +4,7 @@
 - Usuario: @mgonzalz
 
 
-El repositorio contiene el archivo `main.py` que ejecuta el programa. La carpeta `modulos` alberga: `classZona.py` contiene las clases usadas para la realización del ejercicio, en este caso se tratan de *Zona* y *Objeto*; `utils.py` las funciones del programa, como pueden ser la agregación de una habitación u objeto, entre otras. Dentro de `UML` se encuentra un archivo *.drawio* con el UML diseñado, y este mismo también en formato png. Por último, el archivo `requierements` incluye las bibliotecas junto con sus respectivas versiones utilizadas.
+El repositorio contiene el archivo `main.py` que ejecuta el programa. La carpeta `modulos` alberga: `classZona.py` contiene las clases usadas para la realización del ejercicio, en este caso se tratan de *Zona* y *Objeto*; `utils.py` las funciones del programa, como pueden ser la agregación de una habitación u objeto, entre otras. Dentro de `UML` se encuentra un archivo *.drawio* con el UML diseñado, y este mismo también en formato png. Por último, el archivo `requirements` incluye las bibliotecas junto con sus respectivas versiones utilizadas.
 
 ## Enunciado.
 Le proponemos realizar un proyecto que consiste en la escritura de un script Python que permite a un robot aspirador calcular la superficie de una habitación y estimar el tiempo de limpieza.

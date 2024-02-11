@@ -12,6 +12,8 @@ def add_habitacion(nombre_hab, x_hab, y_hab, canvas):
             y = float(y)
             if x > 0 and y > 0:
                 habitacion = Zona(nombre, x, y)
+                if habitaciones:
+                    habitacion.coord_x = habitaciones[-1].coord_x + habitaciones[-1].x*10 #separación entre habitaciones.
                 habitaciones.append(habitacion)
                 display_habitacion(nombre, x, y, canvas)
                 for i in [x_hab, y_hab , nombre_hab]:
@@ -60,7 +62,11 @@ def add_object(hab_var, nombre_var, x_var, y_var, coord_x_var, coord_y_var, canv
 
 
 def display_habitacion(nombre, ancho ,alto, canvas):
-    x1, y1, x2, y2 = 0, 0, ancho * 10, alto * 10 # 1 metro equivale a 10 pixeles.
+    for i in habitaciones:
+        if i.nombre == nombre:
+            x, y = i.coord_x, i.coord_y
+    x1, y1 = x, y
+    x2, y2 = x1 + ancho * 10, y1 + alto * 10 # 1 metro equivale a 10 pixeles.
     area = habitaciones[-1].get_area() # al añadir la habitación, se trata del último elemento de la lista.
     tiempo = habitaciones[-1].get_tiempo()
     canvas.create_rectangle(x1, y1, x2, y2, fill='lightgrey')
@@ -68,6 +74,13 @@ def display_habitacion(nombre, ancho ,alto, canvas):
     habitaciones[-1].id_canvas = text # id en el objeto para modificar el texto en el canvas (área).
 
 def display_objecto(nombre, ancho, alto, coord_x, coord_y, canvas):
-    x1, y1, x2, y2 = coord_x * 10, coord_y * 10, (coord_x + ancho) * 10, (coord_y + alto) * 10
+    x1, y1 = 0, 0
+    for i in habitaciones:
+        for obj in i.objeto:
+            if obj.nombre == nombre:
+                x1, y1 = i.coord_x, i.coord_y
+    x2, y2 = x1 + (coord_x + ancho) * 10, y1 + (coord_y + alto) * 10
+    x1 += coord_x * 10
+    y1 += coord_y * 10
     canvas.create_rectangle(x1, y1, x2, y2, fill='plum2')
     canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=f'{nombre}', justify='center', anchor='center', font=('Helveltica', 10, 'bold'), fill='white')

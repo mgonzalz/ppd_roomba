@@ -5,6 +5,9 @@ class Zona():
             self.x = x
             self.y = y
             self.objeto = [] # Objetos innaccesibles para el Roomba.
+            # Coordenadas para la correcta visualización en Canvas.
+            self.coord_x = 0
+            self.coord_y = 0
         else:
             raise ValueError("Los valores, ancho y alto, deben ser flotantes y el nombre debe ser un string.")
     def add_objeto(self, nombre_obj, xobj, yobj, coord_x, coord_y): #xobj, yobj = ancho y alto del objeto; coord_x, coord_y = coordenadas cartesianas del objeto.
